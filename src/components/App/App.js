@@ -11,28 +11,18 @@ import Alerts from '../Alerts/Alerts';
 // --------------------------
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      alertmsg: '',
-      sampleUrl: '',
-      searchResults: [],
-      playlistName: 'New playlist',
-      playlistTracks:[]
-    };
-    this.addTrack = this.addTrack.bind(this);
-    this.removeTrack = this.removeTrack.bind(this);
-    this.updatePlaylistName = this.updatePlaylistName.bind(this);
-    this.savePlaylist = this.savePlaylist.bind(this);
-    this.search = this.search.bind(this);
-    this.togglePlay = this.togglePlay.bind(this);
-    this.resetState = this.resetState.bind(this);
-  }
+  state = {
+    alertmsg: '',
+    sampleUrl: '',
+    searchResults: [],
+    playlistName: 'New playlist',
+    playlistTracks:[]
+  };
 
   // --------------------------
   // set sample url and manage play/pause auctions
 
-  togglePlay(track) {
+  togglePlay = (track) => {
     this.setState(
       {
         sampleUrl: track.play
@@ -46,7 +36,7 @@ class App extends React.Component {
   // --------------------------
   // add track from search results to playlist
 
-  addTrack(track) {
+  addTrack = (track) => {
     // create array of actual playlist id's
     let playlistTracksIndexes = [];
     for (let i = 0; i < this.state.playlistTracks.length; i++) {
@@ -75,7 +65,7 @@ class App extends React.Component {
   // --------------------------
   // remove track from playlist
 
-  removeTrack(track) {
+  removeTrack = (track) => {
     this.state.playlistTracks.forEach((result,index) => {
         if (result.id === track.id) {
           this.state.playlistTracks.splice(index,1);
@@ -93,7 +83,7 @@ class App extends React.Component {
   // --------------------------
   // update playlist name
 
-  updatePlaylistName(eventName) {
+  updatePlaylistName = (eventName) => {
     this.setState(
       {
         playlistName: eventName.target.value
@@ -104,7 +94,7 @@ class App extends React.Component {
   // --------------------------
   // on save done: revert default Playlist name, reset lists, set message
 
-  resetState() {
+  resetState = () => {
     this.setState({
       searchResults: [],
       playlistName: 'New playlist',
@@ -116,7 +106,7 @@ class App extends React.Component {
   // --------------------------
   // save playlist to user spotify account
 
-  savePlaylist() {
+  savePlaylist = () => {
     // create array of tracks uri to be passed to Spotify API endpoint
     let trackURIs = [];
     for (let i = 0; i < this.state.playlistTracks.length; i++) {
@@ -142,7 +132,7 @@ class App extends React.Component {
   // --------------------------
   // search spotify
 
-  search(term) {
+  search = (term) => {
     Spotify.search(term).then(searchResults => {
       this.setState(
         {
@@ -160,10 +150,15 @@ class App extends React.Component {
 
   // --------------------------
 
+  componentDidMount() {
+    const term = sessionStorage.getItem('searchTerm');
+    this.search(term);
+  }
+
   render() {
     return (
       <div>
-        <h1>Ja<span className="highlight">mmm</span>ing</h1>
+        <h1>Playlis<span className="highlight">fy</span></h1>
         <div className="App">
           <SearchBar
             onSearch={this.search}

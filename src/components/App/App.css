@@ -4,12 +4,6 @@
   font-family: 'Work Sans', sans-serif;
   font-weight: 500;
   color: #fff;
-  /*
-  background-image: url('./image_assets/background_photo_desktop.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  */
 }
 
 .App-playlist {
@@ -22,5 +16,11 @@
   .App-playlist {
     align-items: center;
     flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .App {
+    padding: 0 3%;
   }
 }

@@ -2,23 +2,26 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 6.94rem;
-  /*margin-bottom: 6.33rem;*/
+  padding: 3rem 0;
 }
 
 .SearchBar input {
-  width: 287px;
+  width: 100%;
+  max-width: 375px;
   padding: .88rem 0;
   border: 1px solid #fff;
   border-radius: 3px;
-  margin-bottom: 2.22rem;
   color: #010c3f;
   text-align: center;
   font-size: 1rem;
+  transition: transform 150ms ease-in;
 }
 
 .SearchBar input:focus {
   outline: none;
+  transform: scale(1.25);
+  box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+  transition: transform 150ms ease-in;
 }
 
 .SearchBar input[type="submit"] {

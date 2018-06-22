@@ -1,16 +1,11 @@
 import React from 'react';
 import './SearchBar.css';
 
+const lastSearch = sessionStorage.getItem('searchTerm');
+
 class SearchBar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.search = this.search.bind(this);
-    this.handleTermChange = this.handleTermChange.bind(this);
-  }
 
-  // --------------------------
-
-  handleTermChange(e) {
+  handleTermChange = e => {
     this.setState(
       {
         term: e.target.value
@@ -20,9 +15,16 @@ class SearchBar extends React.Component {
 
   // --------------------------
 
-  search(e) {
+  search = e => {
     this.props.onSearch(this.state.term);
+    sessionStorage.setItem('searchTerm', this.state.term);
     e.preventDefault();
+  }
+
+  // --------------------------
+
+  handleFocus = e => {
+    e.target.value = " ";
   }
 
   // --------------------------
@@ -31,8 +33,8 @@ class SearchBar extends React.Component {
     return (
       <form onSubmit={this.search}>
       <div className="SearchBar">
-        <input placeholder="Enter A Song Title" onChange={this.handleTermChange} />
-        <input type="submit" value="SEARCH"></input>
+        <input type="text" placeholder={lastSearch ? lastSearch : "Enter A Song Title"} onChange={this.handleTermChange} onFocus={this.handleFocus} />
+        <input type="submit" hidden value="SEARCH"></input>
       </div>
       </form>
     )

@@ -1,4 +1,4 @@
-## Jammming
+## Playlisfy
 
 This project allows you to search Spotify tracks library, create custom playlist, and save it on User's Spotify account.
 

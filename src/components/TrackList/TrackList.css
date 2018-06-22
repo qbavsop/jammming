@@ -1,3 +1,21 @@
 .TrackList {
   width: 100%;
 }
+
+.TrackItemAnimation-enter {
+  transform: translateX(-100%);
+}
+
+.TrackItemAnimation-enter.TrackItemAnimation-enter-active {
+  transform: translateX(0);
+  transition: transform 300ms ease-in;
+}
+
+.TrackItemAnimation-leave {
+  transform: translateX(0);
+}
+
+.TrackItemAnimation-leave.TrackItemAnimation-leave-active {
+  transform: translateX(-100%);
+  transition: transform 150ms ease-in;
+}
